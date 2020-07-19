@@ -1,0 +1,20 @@
+{
+    "name": "07-restserver",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "jshintConfig": {
+        "esversion": 6
+    },
+    "dependencies": {
+        "express": "^4.17.1"
+    },
+    "devDependencies": {
+        "jshint": "^2.11.1"
+    }
+}
