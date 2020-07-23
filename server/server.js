@@ -1,11 +1,16 @@
 require('./config/config');
 
+const mongoose = require('mongoose');
 const express = require('express');
 const app = express();
 
+// mongoose.set('useCreateIndex', true);
+// mongoose.set('useFindAndModify', false);
 
 // ¿bodyParser? $ npm install body-parser  // npm body-parser ,, ya incluido en express 4.16 hacia adelante
 // Lección 80
+// app.use('/usuario', require('./routes/usuario'));
+
 
 // for parsing application/json
 app.use(express.json());
@@ -13,35 +18,24 @@ app.use(express.json());
 // for parsing application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/usuario', (req, res) => {
-    res.status(200).json('get usuario');
-});
+app.use(require('./routes/usuario'));
 
-app.post('/usuario', (req, res) => {
-    let body = req.body;
-    if (body.nombre === undefined) {
-        res.status(400).json({
-            ok: false,
-            mensaje: 'El nombre es necesario'
-        });
-    } else {
-        res.status(200).json({
-            persona: body
-        });
-    }
 
-});
+// mongodb+srv://saitac:ZGjRpsVi3zERBlxM@cluster0.ovmog.mongodb.net/cafe
 
-app.put('/usuario/:id', (req, res) => {
-    let id = req.params.id;
-    res.status(200).json({
-        id
-    });
-});
+// Conectar a Base de Datos, Puerto: 27017
+mongoose.connect(process.env.URLDB, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true
+}, (error) => {
 
-app.delete('/usuario', (req, res) => {
-    res.status(200).json('delete usuario');
-});
+    if (error) throw error;
+    console.log('Base de datos ONLINE!');
+
+}).catch(error => console.log('Error!!', error));
+// .then(console.log('ok'))
+
 
 app.listen(process.env.PORT, '', () => {
     console.log('Escuchando el puerto', process.env.PORT);
