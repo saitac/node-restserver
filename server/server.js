@@ -2,6 +2,7 @@ require('./config/config');
 
 const mongoose = require('mongoose');
 const express = require('express');
+const path = require('path');
 const app = express();
 
 // ¿bodyParser? $ npm install body-parser  // npm body-parser ,, ya incluido en express 4.16 hacia adelante
@@ -14,6 +15,12 @@ app.use(express.json());
 
 // for parsing application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
+
+// Habilitar la carpeta publica
+app.use(express.static(path.resolve(__dirname, '../public')));
+
+// console.log(__dirname + '../public');
+// console.log(path.resolve(__dirname, '../public'));
 
 // Configuración Global de Rutas
 app.use(require('./routes/index'));
