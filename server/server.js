@@ -9,7 +9,6 @@ const app = express();
 // Lección 80
 // app.use('/usuario', require('./routes/usuario'));
 
-
 // for parsing application/json
 app.use(express.json());
 
@@ -18,9 +17,6 @@ app.use(express.urlencoded({ extended: true }));
 
 // Habilitar la carpeta publica
 app.use(express.static(path.resolve(__dirname, '../public')));
-
-// console.log(__dirname + '../public');
-// console.log(path.resolve(__dirname, '../public'));
 
 // Configuración Global de Rutas
 app.use(require('./routes/index'));
